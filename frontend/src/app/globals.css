@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #f8faf8;
+    color: #1a1a1a;
+  }
+  :root {
+    --brand-primary:   #2E7D32;
+    --brand-secondary: #66BB6A;
+    --brand-accent:    #E53935;
+    --brand-light:     #E8F5E9;
+    --brand-dark:      #1B5E20;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-primary hover:bg-brand-dark text-white font-semibold
+           px-5 py-2.5 rounded-xl transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed
+           active:scale-95 shadow-sm;
+  }
+  .btn-secondary {
+    @apply bg-brand-light hover:bg-brand-secondary/20 text-brand-primary
+           font-semibold px-5 py-2.5 rounded-xl transition-all duration-200;
+  }
+  .btn-danger {
+    @apply bg-brand-accent hover:bg-red-700 text-white
+           font-semibold px-5 py-2.5 rounded-xl transition-all duration-200;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;
+  }
+  .input {
+    @apply w-full border border-gray-200 rounded-xl px-4 py-3 text-sm
+           focus:outline-none focus:ring-2 focus:ring-brand-primary/40
+           focus:border-brand-primary transition-all duration-200
+           placeholder:text-gray-400;
+  }
+  .badge-present  { @apply bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full; }
+  .badge-absent   { @apply bg-red-100   text-red-800   text-xs font-semibold px-2.5 py-0.5 rounded-full; }
+  .badge-late     { @apply bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full; }
+  .badge-leave    { @apply bg-blue-100  text-blue-800  text-xs font-semibold px-2.5 py-0.5 rounded-full; }
+  .badge-pending  { @apply bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full; }
+  .badge-approved { @apply bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full; }
+  .badge-rejected { @apply bg-red-100   text-red-800   text-xs font-semibold px-2.5 py-0.5 rounded-full; }
+}
+
+@layer utilities {
+  .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .gradient-brand {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
