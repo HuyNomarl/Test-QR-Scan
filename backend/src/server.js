@@ -24,6 +24,20 @@ async function start() {
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
   });
+
+  console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL);
+  console.log(
+    "DATABASE_HOST:",
+    process.env.DATABASE_URL
+      ? new URL(process.env.DATABASE_URL).hostname
+      : "MISSING",
+  );
+  console.log(
+    "DATABASE_PORT:",
+    process.env.DATABASE_URL
+      ? new URL(process.env.DATABASE_URL).port
+      : "MISSING",
+  );
 }
 
 start();
