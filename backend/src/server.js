@@ -12,9 +12,12 @@ async function start() {
 
     // AUTO CREATE ADMIN
     await seedAdmin();
-
   } catch (err) {
-    console.error("❌ Database connection failed:", err.message);
+    console.error("❌ Database connection failed");
+    console.error("name:", err.name);
+    console.error("message:", err.message);
+    console.error("code:", err.code);
+    console.error("stack:", err.stack);
     process.exit(1);
   }
 
