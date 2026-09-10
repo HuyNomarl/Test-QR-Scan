@@ -1,9 +1,27 @@
 require("dotenv").config();
+
 const app = require("./app");
 const db = require("./config/database");
 const seedAdmin = require("./utils/seedAdmin");
 
 const PORT = process.env.PORT || 5000;
+
+// DEBUG DATABASE CONFIG
+console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL);
+
+if (process.env.DATABASE_URL) {
+  try {
+    const dbUrl = new URL(process.env.DATABASE_URL);
+
+    console.log("DATABASE_HOST:", dbUrl.hostname);
+    console.log("DATABASE_PORT:", dbUrl.port);
+    console.log("DATABASE_NAME:", dbUrl.pathname);
+  } catch (err) {
+    console.error("❌ DATABASE_URL invalid:", err.message);
+  }
+} else {
+  console.error("❌ DATABASE_URL is MISSING");
+}
 
 async function start() {
   try {
@@ -24,20 +42,6 @@ async function start() {
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
   });
-
-  console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL);
-  console.log(
-    "DATABASE_HOST:",
-    process.env.DATABASE_URL
-      ? new URL(process.env.DATABASE_URL).hostname
-      : "MISSING",
-  );
-  console.log(
-    "DATABASE_PORT:",
-    process.env.DATABASE_URL
-      ? new URL(process.env.DATABASE_URL).port
-      : "MISSING",
-  );
 }
 
 start();
